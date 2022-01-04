@@ -21,23 +21,25 @@ search_button.onclick= function(){
     
 };
 var display_daily_weather = function(weather_info){
-    var city_date = document.createElement("p")
-    city_date.textContent = weather_info.name + "("+new Date().toLocaleDateString() +")"
-    document.querySelector(".current_weather").appendChild(city_date) 
+    var city_today = document.createElement("p")
+    city_today.textContent = weather_info.name + "("+new Date().toLocaleDateString() +")"
+    document.querySelector(".current_weather").appendChild(city_today) 
 };
 var display_five_Day_weather = function(weather_info){
     var city_five_day = document.createElement("p")
-    city_five_day.textContent = weather_info.name + "("+new Date().toLocaleDateString() +")"
+    // city_five_day.textContent = weather_info.city.timezone
+    console.log(five_day_date)
+    var day_one_date_list= city_five_day.textContent = weather_info.list[0].dt_txt.split(' ')
+    var five_day_date_list = day_one_date_list[0].split('-')
+    console.log(five_day_date_list)
+    var five_day_date = five_day_date_list[1]+'/'+five_day_date_list[2]+'/'+five_day_date_list[0]
     document.querySelector(".forecast").appendChild(city_five_day) 
 };
 
 var total_number=0
-var average = function(list_of_nums){
-    for(i=0;i<list_of_nums.length;i++){
-        total_number+=list_of_nums[i]
-        
-    }
+var get_average = function(list_of_nums){
+    for(i=0;i<list_of_nums.length;i++){total_number+=list_of_nums[i]}
     return total_number/list_of_nums.length
 };
-console.log(average([2,4]))
+console.log(get_average([2,4]))
 console.log(total_number)
