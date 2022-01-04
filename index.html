@@ -9,11 +9,16 @@
     <body>
         <main>
             <section class="jubotron"></section>
-            <section class="searchBox"></section>
-            <section class="citiesList"></section>
-            <section class="cityToday"></section>
-            <section class="fiveDayfordcast"></section>
+            <section id="search_info" class="searchBox">
+                <input id='city_search' type="text"/>
+                <button id="search_button">Search</button>
+            </section>
+            <section class="previous_searchs"></section>
+            <section class="current_weather"></section>
+            <section class="forecast"></section>
         </main>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
         <script src="./script.js"></script>
     </body>
 </html>
