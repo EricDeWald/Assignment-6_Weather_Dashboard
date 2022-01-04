@@ -12,6 +12,12 @@ search_button.onclick= function(){
         console.log(new Date().toLocaleDateString())
         display_daily_weather(daily_weather_json)
     })
+    fetch('https://api.openweathermap.org/data/2.5/forecast?q='+search_data.value.trim()+'&appid=32f08ff1a5bc34c151e7de01ec1cf139').then(function(response){
+       return response.json()
+    }).then(function(five_day_json){
+        console.log(five_day_json)
+        display_five_Day_weather(five_day_json)
+    })
     
 };
 var display_daily_weather = function(weather_info){
@@ -19,6 +25,12 @@ var display_daily_weather = function(weather_info){
     city_date.textContent = weather_info.name + "("+new Date().toLocaleDateString() +")"
     document.querySelector(".current_weather").appendChild(city_date) 
 };
+var display_five_Day_weather = function(weather_info){
+    var city_five_day = document.createElement("p")
+    city_five_day.textContent = weather_info.name + "("+new Date().toLocaleDateString() +")"
+    document.querySelector(".forecast").appendChild(city_five_day) 
+};
+
 var total_number=0
 var average = function(list_of_nums){
     for(i=0;i<list_of_nums.length;i++){
