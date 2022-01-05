@@ -9,7 +9,7 @@ openweatherapi = '32f08ff1a5bc34c151e7de01ec1cf139'
 search_button.onclick= function(){
     console.log('click')
     console.log(search_data.value.trim())
-    var key=
+    var key=''
     localStorage.setItem(key,search_data.value.trim())
 
     if (search_data.value.trim()===""){
@@ -135,6 +135,13 @@ var display_daily_uvi = function(uv_info){
     $("#day_5_icon").attr("src", "https://openweathermap.org/img/w/" + uv_info.daily[5].weather[0].icon + ".png")
     $("#today_icon").attr("src", "https://openweathermap.org/img/w/" + uv_info.daily[0].weather[0].icon + ".png")
 
+    if (uv_info.current.uvi < 3) {
+        $("#today_UV").attr("class", "good");
+    } else if (data.current.uvi >= 2 && data.current.uvi <6 ) {
+        $("#today_UV").attr("class", "moderate");
+    } else {
+        $("#today_UV").attr("class", "bad");
+}
 
     
 };
@@ -184,18 +191,12 @@ var display_five_Day_weather = function(weather_info,uv_info){
 };
 
 
-if (uv_info.current.uvi < 3) {
-        $("#today_UV").attr("class", "good");
-    } else if (data.current.uvi >= 2 && data.current.uvi <6 ) {
-        $("#today_UV").attr("class", "moderate");
-    } else {
-        $("#today_UV").attr("class", "bad");
-}
 
-function(){
-    localStorage.getItem();
-    var history = document.createElement("<button></button>")
-}
+
+// function(){
+//     localStorage.getItem();
+//     var history = document.createElement("<button></button>")
+// }
 
 var total_number=0
 var get_average = function(list_of_nums){
