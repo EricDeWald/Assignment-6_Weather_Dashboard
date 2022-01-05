@@ -1,6 +1,10 @@
 var search_data = document.querySelector('#city_search')
 var search_button = document.querySelector('#search_button')
 
+
+
+openweatherapi = '32f08ff1a5bc34c151e7de01ec1cf139'
+
 search_button.onclick= function(){
     console.log('click')
     console.log(search_data.value.trim())
@@ -8,13 +12,14 @@ search_button.onclick= function(){
         alert("enter city")
         
     }
-    fetch('https://api.openweathermap.org/data/2.5/weather?q='+search_data.value.trim()+'&appid=32f08ff1a5bc34c151e7de01ec1cf139').then(function(response){
+     fetch('https://api.openweathermap.org/data/2.5/weather?q='+search_data.value.trim()+'&appid=32f08ff1a5bc34c151e7de01ec1cf139').then(function(response){
        return response.json()
     }).then(function(daily_weather_json){
         console.log(daily_weather_json)
         search_data.value = ''
         console.log(new Date().toLocaleDateString())
         display_daily_weather(daily_weather_json)
+    
     })
     fetch('https://api.openweathermap.org/data/2.5/forecast?q='+search_data.value.trim()+'&appid=32f08ff1a5bc34c151e7de01ec1cf139').then(function(response){
        return response.json()
@@ -23,30 +28,43 @@ search_button.onclick= function(){
         display_five_Day_weather(five_day_json)
     })
     
+    fetch('https://api.openweathermap.org/data/2.5/onecall?lat='+latitude+'&lon='+longitude+'&appid=32f08ff1a5bc34c151e7de01ec1cf139').then(function(response){
+       return response.json()
+    }).then(function(uv_info){
+        console.log(uv_info)
+        display_five_Day_weather(uv_info)
+    })
 };
 
-var display_daily_weather = function(weather_info){
-    var city_today = document.createElement("p")
+var display_daily_weather = function(weather_info,uv_info){
+    var city_today = document.createElement("h2")
     city_today.textContent = weather_info.name + " ("+new Date().toLocaleDateString() +")"
-    document.querySelector("#city_weather").appendChild(city_today)
+    document.querySelector("#city_weather").append(city_today)
 
-    var city_today_temp = document.createElement("p")
-    city_today.textContent = "Temp: " + weather_info.main.temp
-    document.querySelector("#today_temp").appendChild(city_today_temp)
+    var city_today_temp = document.createElement("h4")
+    city_today_temp.textContent = "Temp: " + weather_info.main.temp +" F"
+    document.querySelector("#today_temp").append(city_today_temp)
 
-    var city_today_wind = document.createElement("p")
-    city_today.textContent = "Wind: " + weather_info.main.wind.speed
-    document.querySelector("#today_wind").appendChild(city_today_wind)
+    var city_today_wind = document.createElement("h4")
+    city_today_wind.textContent = "Wind: " + weather_info.wind.speed + " MPH"
+    document.querySelector("#today_wind").append(city_today_wind)
 
-    var city_today_humidity = document.createElement("p")
-    city_today.textContent = "Humidity: " + weather_info.main.humidity
-    document.querySelector("#today_humidity").appendChild(city_today_humidity)
+    var city_today_humidity = document.createElement("h4")
+    city_today_humidity.textContent = "Humidity: " + weather_info.main.humidity + " %"
+    document.querySelector("#today_humidity").append(city_today_humidity)
 
-    var city_today_UV = document.createElement("p")
-    city_today.textContent = "UV Index: " + weather_info.main.temp
-    document.querySelector("#today_UV").appendChild(city_today_UV)
-
+    var city_today_UV = document.createElement("h4")
+    city_today_UV.textContent = "UV Index: " + data.current.uvi
+    document.querySelector("#today_UV").append(city_today_UV)
     
+    var city_today_UV = document.createElement("h4")
+    city_today_UV.textContent = "UV Index: " + data.current.uvi
+    document.querySelector("#today_UV").append(city_today_UV)    
+
+    var latitude = coord.lat
+    var longitude = coord.lon
+
+   
 };
 
 var display_five_Day_weather = function(weather_info){
@@ -89,9 +107,6 @@ var display_five_Day_weather = function(weather_info){
     var five_day_date_five = document.createElement("p")
     five_day_date_five.textContent = five_day_date_list_five[1]+'/'+five_day_date_list_five[2]+'/'+five_day_date_list_five[0]
     document.querySelector("#day_5_date").appendChild(five_day_date_five) 
-    
-     
-    
 };
 
 
