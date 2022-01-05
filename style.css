@@ -2,6 +2,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   line-height: 1;
+  background-color: rgb(185, 184, 184);
 }
 
 textarea {
@@ -70,8 +71,8 @@ textarea {
   transition: all 0.3s ease-in-out;
 }
 .card{
-  background-color: #06aed5;
+  background-color: #7cc3ec;
 }
 .current_weather{
-  background-color: aqua;
+  background-color: rgb(112, 170, 224);
 }

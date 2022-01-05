@@ -1,7 +1,8 @@
 var search_data = document.querySelector('#city_search')
 var search_button = document.querySelector('#search_button')
 
-
+var latitude = ''
+var longitude = ''
 
 openweatherapi = '32f08ff1a5bc34c151e7de01ec1cf139'
 
@@ -12,37 +13,44 @@ search_button.onclick= function(){
         alert("enter city")
         
     }
-     fetch('https://api.openweathermap.org/data/2.5/weather?q='+search_data.value.trim()+'&appid=32f08ff1a5bc34c151e7de01ec1cf139').then(function(response){
+     fetch('https://api.openweathermap.org/data/2.5/weather?q='+search_data.value.trim()+'&units=imperial&appid=32f08ff1a5bc34c151e7de01ec1cf139').then(function(response){
        return response.json()
     }).then(function(daily_weather_json){
         console.log(daily_weather_json)
         search_data.value = ''
         console.log(new Date().toLocaleDateString())
         display_daily_weather(daily_weather_json)
+
+        latitude = daily_weather_json.coord.lat
+        longitude = daily_weather_json.coord.lon
+
+        fetch('https://api.openweathermap.org/data/2.5/onecall?lat='+latitude+'&lon='+longitude+'&units=imperial&appid=32f08ff1a5bc34c151e7de01ec1cf139').then(function(response){
+        return response.json()
+        }).then(function(uv_info){
+        console.log(uv_info)
+        display_daily_uvi(uv_info)
+    })
+        
     
     })
-    fetch('https://api.openweathermap.org/data/2.5/forecast?q='+search_data.value.trim()+'&appid=32f08ff1a5bc34c151e7de01ec1cf139').then(function(response){
+    fetch('https://api.openweathermap.org/data/2.5/forecast?q='+search_data.value.trim()+'&units=imperial&appid=32f08ff1a5bc34c151e7de01ec1cf139').then(function(response){
        return response.json()
     }).then(function(five_day_json){
         console.log(five_day_json)
         display_five_Day_weather(five_day_json)
     })
     
-    fetch('https://api.openweathermap.org/data/2.5/onecall?lat='+latitude+'&lon='+longitude+'&appid=32f08ff1a5bc34c151e7de01ec1cf139').then(function(response){
-       return response.json()
-    }).then(function(uv_info){
-        console.log(uv_info)
-        display_five_Day_weather(uv_info)
-    })
+
+   
 };
 
-var display_daily_weather = function(weather_info,uv_info){
+var display_daily_weather = function(weather_info){
     var city_today = document.createElement("h2")
     city_today.textContent = weather_info.name + " ("+new Date().toLocaleDateString() +")"
     document.querySelector("#city_weather").append(city_today)
 
     var city_today_temp = document.createElement("h4")
-    city_today_temp.textContent = "Temp: " + weather_info.main.temp +" F"
+    city_today_temp.textContent = "Temp: " + weather_info.main.temp +" ℉"
     document.querySelector("#today_temp").append(city_today_temp)
 
     var city_today_wind = document.createElement("h4")
@@ -53,21 +61,71 @@ var display_daily_weather = function(weather_info,uv_info){
     city_today_humidity.textContent = "Humidity: " + weather_info.main.humidity + " %"
     document.querySelector("#today_humidity").append(city_today_humidity)
 
+
+};
+var display_daily_uvi = function(uv_info){
+    console.log("uv running")
     var city_today_UV = document.createElement("h4")
-    city_today_UV.textContent = "UV Index: " + data.current.uvi
+    city_today_UV.textContent = "UV Index: " + uv_info.current.uvi
     document.querySelector("#today_UV").append(city_today_UV)
     
-    var city_today_UV = document.createElement("h4")
-    city_today_UV.textContent = "UV Index: " + data.current.uvi
-    document.querySelector("#today_UV").append(city_today_UV)    
+    var city_five_day_temp1 = document.createElement("p")
+    city_five_day_temp1.textContent = "Temp: " + uv_info.daily[1].temp.day +" ℉" 
+    document.querySelector("#day_1_temp").appendChild(city_five_day_temp1)
 
-    var latitude = coord.lat
-    var longitude = coord.lon
+    var city_five_day_temp2 = document.createElement("p")
+    city_five_day_temp2.textContent = "Temp: " + uv_info.daily[2].temp.day +" ℉" 
+    document.querySelector("#day_2_temp").appendChild(city_five_day_temp2)
 
-   
+    var city_five_day_temp3 = document.createElement("p")
+    city_five_day_temp3.textContent = "Temp: " + uv_info.daily[3].temp.day +" ℉" 
+    document.querySelector("#day_3_temp").appendChild(city_five_day_temp3)
+
+    var city_five_day_temp4 = document.createElement("p")
+    city_five_day_temp4.textContent = "Temp: " + uv_info.daily[4].temp.day +" ℉" 
+    document.querySelector("#day_4_temp").appendChild(city_five_day_temp4)
+
+    var city_five_day_temp5 = document.createElement("p")
+    city_five_day_temp5.textContent = "Temp: " + uv_info.daily[5].temp.day +" ℉" 
+    document.querySelector("#day_5_temp").appendChild(city_five_day_temp5)
+
+    var city_five_day_wind1 = document.createElement("p")
+    city_five_day_wind1.textContent = "Wind: " + uv_info.daily[1].wind_speed+" MPH" 
+    document.querySelector("#day_1_wind").appendChild(city_five_day_wind1)
+
+    var city_five_day_wind2 = document.createElement("p")
+    city_five_day_wind2.textContent = "Wind: " + uv_info.daily[2].wind_speed+" MPH" 
+    document.querySelector("#day_2_wind").appendChild(city_five_day_wind2)
+    
+    var city_five_day_wind3 = document.createElement("p")
+    city_five_day_wind3.textContent = "Wind: " + uv_info.daily[3].wind_speed+" MPH" 
+    document.querySelector("#day_3_wind").appendChild(city_five_day_wind3)
+    
+    var city_five_day_wind4 = document.createElement("p")
+    city_five_day_wind4.textContent = "Wind: " + uv_info.daily[4].wind_speed+" MPH" 
+    document.querySelector("#day_4_wind").appendChild(city_five_day_wind4)
+    
+    var city_five_day_wind5 = document.createElement("p")
+    city_five_day_wind5.textContent = "Wind: " + uv_info.daily[5].wind_speed+" MPH" 
+    document.querySelector("#day_5_wind").appendChild(city_five_day_wind5)
+
+    var city_five_day_humidity1 = document.createElement("p")
+    city_five_day_humidity1.textContent = "Humidity: " + uv_info.daily[1].humidity
+    document.querySelector("#day_1_wind").appendChild(city_five_day_humidity1) +" %"
+    var city_five_day_humidity2 = document.createElement("p")
+    city_five_day_humidity2.textContent = "Humidity: " + uv_info.daily[2].humidity
+    document.querySelector("#day_2_wind").appendChild(city_five_day_humidity2) +" %"
+    var city_five_day_humidity3 = document.createElement("p")
+    city_five_day_humidity3.textContent = "Humidity: " + uv_info.daily[3].humidity
+    document.querySelector("#day_3_wind").appendChild(city_five_day_humidity3) +" %"
+    var city_five_day_humidity4 = document.createElement("p")
+    city_five_day_humidity4.textContent = "Humidity: " + uv_info.daily[4].humidity
+    document.querySelector("#day_4_wind").appendChild(city_five_day_humidity4) +" %"
+    var city_five_day_humidity5 = document.createElement("p")
+    city_five_day_humidity5.textContent = "Humidity: " + uv_info.daily[5].humidity
+    document.querySelector("#day_5_wind").appendChild(city_five_day_humidity5) +" %"
 };
-
-var display_five_Day_weather = function(weather_info){
+var display_five_Day_weather = function(weather_info,uv_info){
 
     var city_five_day = document.createElement("p")
     var day_one_date_list= city_five_day.textContent = weather_info.list[0].dt_txt.split(' ')
@@ -106,7 +164,10 @@ var display_five_Day_weather = function(weather_info){
     var five_day_date_list_five = day_one_date_list_five[0].split('-')
     var five_day_date_five = document.createElement("p")
     five_day_date_five.textContent = five_day_date_list_five[1]+'/'+five_day_date_list_five[2]+'/'+five_day_date_list_five[0]
-    document.querySelector("#day_5_date").appendChild(five_day_date_five) 
+    document.querySelector("#day_5_date").appendChild(five_day_date_five)
+
+    
+
 };
 
 
