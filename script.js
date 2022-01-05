@@ -9,6 +9,9 @@ openweatherapi = '32f08ff1a5bc34c151e7de01ec1cf139'
 search_button.onclick= function(){
     console.log('click')
     console.log(search_data.value.trim())
+    var key=
+    localStorage.setItem(key,search_data.value.trim())
+
     if (search_data.value.trim()===""){
         alert("enter city")
         
@@ -180,15 +183,19 @@ var display_five_Day_weather = function(weather_info,uv_info){
 
 };
 
-if (city_today_UV<=2){
-    // document.body.style.backgroundcolor= "green";
-    // }else if(city_today_UV<6){
-    //     document.body.style.backgroundcolor = "red";
-    // }else{
-    //     document.body.style.backgroundcolor= "yellow";
-    }
 
+if (uv_info.current.uvi < 3) {
+        $("#today_UV").attr("class", "good");
+    } else if (data.current.uvi >= 2 && data.current.uvi <6 ) {
+        $("#today_UV").attr("class", "moderate");
+    } else {
+        $("#today_UV").attr("class", "bad");
+}
 
+function(){
+    localStorage.getItem();
+    var history = document.createElement("<button></button>")
+}
 
 var total_number=0
 var get_average = function(list_of_nums){

@@ -76,3 +76,13 @@ textarea {
 .current_weather{
   background-color: rgb(112, 170, 224);
 }
+
+.good {
+  background-color: green;
+}
+.moderate {
+  background-color: rgb(223, 223, 50);
+}
+.bad {
+  background-color: red;
+}
