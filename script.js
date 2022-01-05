@@ -60,8 +60,7 @@ var display_daily_weather = function(weather_info){
     var city_today_humidity = document.createElement("h4")
     city_today_humidity.textContent = "Humidity: " + weather_info.main.humidity + " %"
     document.querySelector("#today_humidity").append(city_today_humidity)
-
-
+   
 };
 var display_daily_uvi = function(uv_info){
     console.log("uv running")
@@ -110,20 +109,31 @@ var display_daily_uvi = function(uv_info){
     document.querySelector("#day_5_wind").appendChild(city_five_day_wind5)
 
     var city_five_day_humidity1 = document.createElement("p")
-    city_five_day_humidity1.textContent = "Humidity: " + uv_info.daily[1].humidity
-    document.querySelector("#day_1_wind").appendChild(city_five_day_humidity1) +" %"
+    city_five_day_humidity1.textContent = "Humidity: " + uv_info.daily[1].humidity+" %"
+    document.querySelector("#day_1_wind").appendChild(city_five_day_humidity1) 
     var city_five_day_humidity2 = document.createElement("p")
-    city_five_day_humidity2.textContent = "Humidity: " + uv_info.daily[2].humidity
-    document.querySelector("#day_2_wind").appendChild(city_five_day_humidity2) +" %"
+    city_five_day_humidity2.textContent = "Humidity: " + uv_info.daily[2].humidity+" %"
+    document.querySelector("#day_2_wind").appendChild(city_five_day_humidity2) 
     var city_five_day_humidity3 = document.createElement("p")
-    city_five_day_humidity3.textContent = "Humidity: " + uv_info.daily[3].humidity
-    document.querySelector("#day_3_wind").appendChild(city_five_day_humidity3) +" %"
+    city_five_day_humidity3.textContent = "Humidity: " + uv_info.daily[3].humidity+" %"
+    document.querySelector("#day_3_wind").appendChild(city_five_day_humidity3) 
     var city_five_day_humidity4 = document.createElement("p")
-    city_five_day_humidity4.textContent = "Humidity: " + uv_info.daily[4].humidity
-    document.querySelector("#day_4_wind").appendChild(city_five_day_humidity4) +" %"
+    city_five_day_humidity4.textContent = "Humidity: " + uv_info.daily[4].humidity+" %"
+    document.querySelector("#day_4_wind").appendChild(city_five_day_humidity4) 
     var city_five_day_humidity5 = document.createElement("p")
-    city_five_day_humidity5.textContent = "Humidity: " + uv_info.daily[5].humidity
-    document.querySelector("#day_5_wind").appendChild(city_five_day_humidity5) +" %"
+    city_five_day_humidity5.textContent = "Humidity: " + uv_info.daily[5].humidity+" %"
+    document.querySelector("#day_5_wind").appendChild(city_five_day_humidity5) 
+
+    
+    $("#day_1_icon").attr("src", "https://openweathermap.org/img/w/" + uv_info.daily[1].weather[0].icon + ".png")
+    $("#day_2_icon").attr("src", "https://openweathermap.org/img/w/" + uv_info.daily[2].weather[0].icon + ".png")
+    $("#day_3_icon").attr("src", "https://openweathermap.org/img/w/" + uv_info.daily[3].weather[0].icon + ".png")
+    $("#day_4_icon").attr("src", "https://openweathermap.org/img/w/" + uv_info.daily[4].weather[0].icon + ".png")
+    $("#day_5_icon").attr("src", "https://openweathermap.org/img/w/" + uv_info.daily[5].weather[0].icon + ".png")
+    $("#today_icon").attr("src", "https://openweathermap.org/img/w/" + uv_info.daily[0].weather[0].icon + ".png")
+
+
+    
 };
 var display_five_Day_weather = function(weather_info,uv_info){
 
@@ -170,6 +180,13 @@ var display_five_Day_weather = function(weather_info,uv_info){
 
 };
 
+if (city_today_UV<=2){
+    // document.body.style.backgroundcolor= "green";
+    // }else if(city_today_UV<6){
+    //     document.body.style.backgroundcolor = "red";
+    // }else{
+    //     document.body.style.backgroundcolor= "yellow";
+    }
 
 
 
