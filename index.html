@@ -3,19 +3,76 @@
     <head>
         <meta>
         <title>Weather Dashboard</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="./style.css">
         <script></script>
     </head>
     <body>
         <main>
-            <section class="jubotron"></section>
-            <section id="search_info" class="searchBox">
-                <input id='city_search' type="text"/>
-                <button id="search_button">Search</button>
+            <header class="jubotron">
+                <h1 class="display-3 row">Weather Dashboard</h1>
+            </header>
+            <section class="row" >
+                <section id="search_info" class="searchBox col-sm-4">
+                    <h1>Seach for a City:</h1>
+                    <input id='city_search' type="text"/>
+                    <button id="search_button">Search</button>
+                    <h2>___________________</h2>
+                    <div id="seach_history"></div>
+                    <section class="previous_searchs row col-sm-4">
+                    </section>
+                </section>
+                <section class="current_weather col-sm-8">
+                    <section id="today_temp_box">
+                        <div id="city_weather"></div>
+                        <div id='today_temp'></div>
+                        <div id="today_wind"></div>
+                        <div id="today_humidity"></div>
+                        <div id='today_UV'></div>
+                    </section>
+                    <h3 class="five_day_title row">5-Day Forecast:</h3>
+                    <section class="forecast row">
+                        <section class="card col-sm-2">
+                            <h5 id="day_1_date"></h5>
+                            <div id="day_1_temp">Temp:</div>
+                            <div id="day_1_icon"></div>
+                            <div id="day_1_wind">Wind:</div>
+                            <div id="day_1_humidity">Humidity:</div>
+                        </section>
+                        <section class="card col-sm-2">
+                            <h5 id="day_2_date"></h5>
+                            <div id="day_2_temp">Temp:</div>
+                            <div id="day_2_icon"></div>
+                            <div id="day_2_wind">Wind:</div>
+                            <div id="day_2_humidity">Humidity:</div>
+                        </section>
+                        <section class="card col-sm-2">
+                            <h5 id="day_3_date"></h5>
+                            <div id="day_3_temp">Temp:</div>
+                            <div id="day_3_icon"></div>
+                            <div id="day_3_wind">Wind:</div>
+                            <div id="day_3_humidity">Humidity:</div>
+                        </section>
+                        <section class="card col-sm-2">
+                            <h5 id="day_4_date"></h5>
+                            <div id="day_4_temp">Temp:</div>
+                            <div id="day_4_icon"></div>
+                            <div id="day_4_wind">Wind:</div>
+                            <div id="day_4_humidity">Humidity:</div>
+                        </section>
+                        <section class="card col-sm-2">
+                            <h5 id="day_5_date"></h5>
+                            <div id="day_5_temp">Temp:</div>
+                            <div id="day_5_icon"></div>
+                            <div id="day_5_wind">Wind:</div>
+                            <div id="day_5_humidity">Humidity:</div>
+                        </section>
+                    </section>
+                </section>
             </section>
-            <section class="previous_searchs"></section>
-            <section class="current_weather"></section>
-            <section class="forecast"></section>
         </main>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
